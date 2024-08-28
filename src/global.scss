@@ -1,5 +1,9 @@
 @import "bulma/bulma";
 
-.h1 {
-	@extend .title;
+h1 {
+    @extend .title;
+}
+
+pre {
+    background-color: --bulma-primary !important;
 }

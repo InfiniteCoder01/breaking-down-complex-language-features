@@ -21335,3 +21335,7 @@ has-background-danger.is-hoverable:active {
   cursor: pointer !important;
   pointer-events: all !important;
 }
+
+pre {
+  background-color: --bulma-primary !important;
+}
