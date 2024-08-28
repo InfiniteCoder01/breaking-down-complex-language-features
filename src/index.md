@@ -1,5 +1,6 @@
 ---
 title: "Breaking down complex language features in C"
+highlight_theme: "base16-ocean.dark"
 ---
 # {{ metadata.title }}
 Modern programming languages have a lot of useful features.

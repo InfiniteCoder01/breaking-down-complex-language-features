@@ -22,52 +22,52 @@ will help us understand what is going on under the hood</p>
 </ul>
 <p>Starting off simple. Methods are essential feature of all modern programming languages.
 And yet, C doesn’t have that. Let’s look at this simple example:</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">class </span><span style="color:#0086b3;">Game </span><span style="color:#323232;">{
-</span><span style="color:#323232;">    Vector2 playerPosition;
-</span><span style="color:#323232;">
-</span><span style="font-weight:bold;color:#a71d5d;">public</span><span style="color:#323232;">:
-</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">void </span><span style="font-weight:bold;color:#795da3;">update</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">float </span><span style="color:#323232;">deltaTime) {
-</span><span style="color:#323232;">        playerPosition.x </span><span style="font-weight:bold;color:#a71d5d;">+=</span><span style="color:#323232;"> deltaTime;
-</span><span style="color:#323232;">    }
-</span><span style="color:#323232;">}
-</span><span style="color:#323232;">
-</span><span style="font-weight:bold;color:#a71d5d;">int </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
-</span><span style="color:#323232;">    Game game;
-</span><span style="color:#323232;">    game.update(</span><span style="color:#0086b3;">0.1</span><span style="color:#323232;">);
-</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">return </span><span style="color:#0086b3;">0</span><span style="color:#323232;">;
-</span><span style="color:#323232;">}
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Game </span><span style="color:#eff1f5;">{
+</span><span style="color:#eff1f5;">    Vector2 playerPosition;
+</span><span style="color:#eff1f5;">
+</span><span style="color:#b48ead;">public</span><span style="color:#eff1f5;">:
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">update</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">float </span><span style="color:#bf616a;">deltaTime</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        playerPosition.</span><span style="color:#bf616a;">x </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> deltaTime;
+</span><span style="color:#eff1f5;">    }
+</span><span style="color:#eff1f5;">}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
+</span><span style="color:#c0c5ce;">    Game game;
+</span><span style="color:#c0c5ce;">    game.</span><span style="color:#8fa1b3;">update</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0.1</span><span style="color:#c0c5ce;">);
+</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+</span><span style="color:#c0c5ce;">}
 </span></pre>
 <p>Here we can see a class, that has a field called player_position and a method called update.
 But how does this method knows about player_position? Let’s transform the example:</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">class </span><span style="color:#0086b3;">Game </span><span style="color:#323232;">{
-</span><span style="font-style:italic;color:#969896;">// &lt;...&gt;
-</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">void </span><span style="font-weight:bold;color:#795da3;">update</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">float </span><span style="color:#323232;">deltaTime) {
-</span><span style="color:#323232;">        this-&gt;playerPosition.x </span><span style="font-weight:bold;color:#a71d5d;">+=</span><span style="color:#323232;"> deltaTime; </span><span style="font-style:italic;color:#969896;">// Added `this-&gt;`
-</span><span style="color:#323232;">    }
-</span><span style="color:#323232;">}
-</span><span style="font-style:italic;color:#969896;">// &lt;...&gt;
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Game </span><span style="color:#eff1f5;">{
+</span><span style="color:#65737e;">// &lt;...&gt;
+</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">update</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">float </span><span style="color:#bf616a;">deltaTime</span><span style="color:#eff1f5;">) {
+</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">-&gt;</span><span style="color:#bf616a;">playerPosition</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">x </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> deltaTime; </span><span style="color:#65737e;">// Added `this-&gt;`
+</span><span style="color:#eff1f5;">    }
+</span><span style="color:#eff1f5;">}
+</span><span style="color:#65737e;">// &lt;...&gt;
 </span></pre>
 <p>After this change, we can see that all class members are actually accessed using <code>this</code> pointer under the hood.
 But where does it come from? Let’s imagine it was in python:</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">class </span><span style="color:#0086b3;">Game</span><span style="color:#323232;">:
-</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;"># &lt;...&gt;
-</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">def </span><span style="font-weight:bold;color:#323232;">update</span><span style="color:#323232;">(self, delta_time: </span><span style="color:#0086b3;">float</span><span style="color:#323232;">):
-</span><span style="color:#323232;">        self.player_position.x </span><span style="font-weight:bold;color:#a71d5d;">+= </span><span style="color:#323232;">delta_time
-</span><span style="font-style:italic;color:#969896;"># &lt;...&gt;
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Game</span><span style="color:#eff1f5;">:
+</span><span style="color:#c0c5ce;">    </span><span style="color:#65737e;"># &lt;...&gt;
+</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">update</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">delta_time</span><span style="color:#c0c5ce;">: float):
+</span><span style="color:#c0c5ce;">        </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.player_position.x += delta_time
+</span><span style="color:#65737e;"># &lt;...&gt;
 </span></pre>
 <p>AHA! <code>self</code> (alternative to C++’s <code>this</code>) comes as a special argument!
 We can now try to replicate this in C:</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">typedef struct</span><span style="color:#323232;"> Game {
-</span><span style="color:#323232;">    Vector2 player_position;
-</span><span style="color:#323232;">} Game;
-</span><span style="color:#323232;">
-</span><span style="font-weight:bold;color:#a71d5d;">void </span><span style="font-weight:bold;color:#795da3;">game_update</span><span style="color:#323232;">(Game</span><span style="font-weight:bold;color:#a71d5d;">* </span><span style="color:#323232;">game, </span><span style="font-weight:bold;color:#a71d5d;">float </span><span style="color:#323232;">delta_time) {
-</span><span style="color:#323232;">    game-&gt;player_position.x </span><span style="font-weight:bold;color:#a71d5d;">+=</span><span style="color:#323232;"> delta_time;
-</span><span style="color:#323232;">}
+<pre style="background-color:#2b303b;">
+<span style="color:#b48ead;">typedef struct</span><span style="color:#c0c5ce;"> Game {
+</span><span style="color:#c0c5ce;">    Vector2 player_position;
+</span><span style="color:#c0c5ce;">} Game;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">game_update</span><span style="color:#c0c5ce;">(Game* </span><span style="color:#bf616a;">game</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">float </span><span style="color:#bf616a;">delta_time</span><span style="color:#c0c5ce;">) {
+</span><span style="color:#c0c5ce;">    game-&gt;player_position.</span><span style="color:#bf616a;">x </span><span style="color:#c0c5ce;">+= delta_time;
+</span><span style="color:#c0c5ce;">}
 </span></pre>
 <h1>Modules</h1>
 <ul>
