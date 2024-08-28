@@ -39,7 +39,7 @@ But how does this method knows about player_position? Let's transform the exampl
 class Game {
 // <...>
     void update(float deltaTime) {
-        this->playerPosition.x += deltaTime; // Added this->
+        this->playerPosition.x += deltaTime; // Added `this->`
     }
 }
 // <...>

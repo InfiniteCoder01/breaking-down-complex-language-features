@@ -44,7 +44,7 @@ But how does this method knows about player_position? Let’s transform the exam
 <span style="font-weight:bold;color:#a71d5d;">class </span><span style="color:#0086b3;">Game </span><span style="color:#323232;">{
 </span><span style="font-style:italic;color:#969896;">// &lt;...&gt;
 </span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">void </span><span style="font-weight:bold;color:#795da3;">update</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">float </span><span style="color:#323232;">deltaTime) {
-</span><span style="color:#323232;">        this-&gt;playerPosition.x </span><span style="font-weight:bold;color:#a71d5d;">+=</span><span style="color:#323232;"> deltaTime; </span><span style="font-style:italic;color:#969896;">// Added this-&gt;
+</span><span style="color:#323232;">        this-&gt;playerPosition.x </span><span style="font-weight:bold;color:#a71d5d;">+=</span><span style="color:#323232;"> deltaTime; </span><span style="font-style:italic;color:#969896;">// Added `this-&gt;`
 </span><span style="color:#323232;">    }
 </span><span style="color:#323232;">}
 </span><span style="font-style:italic;color:#969896;">// &lt;...&gt;

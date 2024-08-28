@@ -21337,5 +21337,5 @@ has-background-danger.is-hoverable:active {
 }
 
 pre {
-  background-color: --bulma-primary !important;
+  background-color: var(--bulma-body-background-color) !important;
 }
