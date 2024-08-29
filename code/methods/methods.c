@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdint.h>
 
 struct Player {
   float health;

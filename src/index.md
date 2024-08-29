@@ -120,3 +120,52 @@ int main() {
   return 0;
 }
 ```
+
+# Generics
+- **Allow classes and functions to operate on any data type.**
+- **Found in: Java, C#, C++ (templates).**
+
+[Code](https://github.com/InfiniteCoder01/breaking-down-complex-language-features/tree/master/code/generics)
+
+Generics (or templates) are a way to make container types and reuse same code for multiple types.
+Consider this C++ example:
+```C++
+#include <iostream>
+
+template<typename T>
+struct Vec2 {
+    T x, y;
+};
+
+int main() {
+    Vec2<float> v;
+    v.x = 2.1;
+    v.y = 4.2;
+    std::cout << v.x << ' ' << v.y << std::endl;
+    return 0;
+}
+```
+
+We can't replicate all the syntactic sugar, but we can utilize macros to make this in C:
+```C
+#include <stdio.h>
+
+#define VEC2(T) struct Vec2_ ## T
+#define VEC2_DEF(T) VEC2(T) { T x, y; }
+
+VEC2_DEF(float);
+
+int main() {
+    VEC2(float) v;
+    v.x = 2.1;
+    v.y = 4.2;
+    printf("%f %f\n", v.x, v.y);
+    return 0;
+}
+```
+
+Be aware: any typedef-ed type will resolve to a different name!
+
+Note: `A ## B` in a macro converts to AB. It's a token pasting operator, you can read more about it [here](https://learn.microsoft.com/en-us/cpp/preprocessor/token-pasting-operator-hash-hash?view=msvc-170)
+
+Another note: Zig also uses a similar approach to emulate generics
