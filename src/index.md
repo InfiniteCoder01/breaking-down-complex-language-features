@@ -12,6 +12,47 @@ We are gonna be using C to implement broken-down versions of patterns.
 That is because C doesn't have any of them. And manual memory management
 will help us understand what is going on under the hood
 
+# Modules
+- **A way to organize code into separate files or namespaces.**
+- **Found in: Python, JavaScript, Ruby, TypeScript, etc.**
+
+[Code](https://github.com/InfiniteCoder01/breaking-down-complex-language-features/tree/master/code/modules)
+
+Modules, or namespaces, can be found in most modern languages.
+They help separate code into reusable segments. Modules (not namespaces) in dynamic
+programming languages can also be lazily-loaded. Yet we will only focus on namespaces here.
+Let's look at the following C++ snippet:
+```C++
+#include <iostream>
+
+namespace logger {
+    void init() {
+        std::cout << "Initialized logger!" << std::endl;
+    }
+}
+
+int main() {
+    logger::init();
+    return 0;
+}
+```
+
+This grouping of functionality can be represented in C using prefixes:
+```C
+#include <stdio.h>
+
+void logger_init() {
+    puts("Initialized logger!\n");
+}
+
+int main() {
+    logger_init();
+    return 0;
+}
+```
+
+Note: As a good coding practice, it's better to move grouped functionality into a separate header file!
+
 # Methods
 - **Functions defined inside a class or object.**
 - **Found in: Java, Python, Ruby, C#, etc.**
@@ -79,9 +120,3 @@ int main() {
   return 0;
 }
 ```
-
-# Modules
-- **A way to organize code into separate files or namespaces.**
-- **Found in: Python, JavaScript, Ruby, TypeScript, etc.**
-
-**TODO!**

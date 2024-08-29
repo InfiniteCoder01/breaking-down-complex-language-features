@@ -14,6 +14,42 @@ but it become overwelming, so here I am breaking those down.</p>
 <p>We are gonna be using C to implement broken-down versions of patterns.
 That is because C doesn’t have any of them. And manual memory management
 will help us understand what is going on under the hood</p>
+<h1>Modules</h1>
+<ul>
+<li><strong>A way to organize code into separate files or namespaces.</strong></li>
+<li><strong>Found in: Python, JavaScript, Ruby, TypeScript, etc.</strong></li>
+</ul>
+<p><a href="https://github.com/InfiniteCoder01/breaking-down-complex-language-features/tree/master/code/modules">Code</a></p>
+<p>Modules, or namespaces, can be found in most modern languages.
+They help separate code into reusable segments. Modules (not namespaces) in dynamic
+programming languages can also be lazily-loaded. Yet we will only focus on namespaces here.
+Let’s look at the following C++ snippet:</p>
+<pre><code><span class="z-source z-c++"><span class="z-meta z-preprocessor z-include z-c++"><span class="z-keyword z-control z-import z-include z-c++">#include</span> <span class="z-string z-quoted z-other z-lt-gt z-include z-c++"><span class="z-punctuation z-definition z-string z-begin z-c++">&lt;</span>iostream<span class="z-punctuation z-definition z-string z-end z-c++">&gt;</span></span>
+</span>
+<span class="z-meta z-namespace z-c++"><span class="z-keyword z-control z-c++">namespace</span> </span><span class="z-meta z-namespace z-c++"><span class="z-entity z-name z-namespace z-c++">logger</span></span><span class="z-meta z-namespace z-c++"> <span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span>
+    <span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c++"><span class="z-entity z-name z-function z-c++">init</span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-meta z-function z-c++"> </span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">
+        std<span class="z-punctuation z-accessor z-c++">::</span>cout <span class="z-keyword z-operator z-arithmetic z-c">&lt;&lt;</span> <span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>Initialized logger!<span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span> <span class="z-keyword z-operator z-arithmetic z-c">&lt;&lt;</span> std<span class="z-punctuation z-accessor z-c++">::</span>endl<span class="z-punctuation z-terminator z-c++">;</span>
+    </span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+
+<span class="z-storage z-type z-c">int</span> <span class="z-meta z-function z-c++"><span class="z-entity z-name z-function z-c++">main</span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-meta z-function z-c++"> </span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">
+    <span class="z-meta z-function-call z-c++"><span class="z-variable z-function z-c++">logger<span class="z-punctuation z-accessor z-c++">::</span></span><span class="z-variable z-function z-c++">init</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function-call z-c++"></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+    <span class="z-keyword z-control z-c++">return</span> <span class="z-constant z-numeric z-c++">0</span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span></code></pre>
+<p>This grouping of functionality can be represented in C using prefixes:</p>
+<pre><code><span class="z-source z-c"><span class="z-meta z-preprocessor z-include z-c"><span class="z-keyword z-control z-import z-include z-c">#include</span> <span class="z-string z-quoted z-other z-lt-gt z-include z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&lt;</span>stdio.h<span class="z-punctuation z-definition z-string z-end z-c">&gt;</span></span>
+</span>
+<span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">logger_init</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-meta z-function-call z-c"><span class="z-support z-function z-C99 z-c">puts</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>Initialized logger!<span class="z-constant z-character z-escape z-c">\n</span><span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span></span></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+
+<span class="z-storage z-type z-c">int</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">main</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    <span class="z-meta z-function-call z-c"><span class="z-variable z-function z-c">logger_init</span><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function-call z-c"></span><span class="z-meta z-function-call z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-punctuation z-terminator z-c">;</span>
+    <span class="z-keyword z-control z-c">return</span> <span class="z-constant z-numeric z-c">0</span><span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
+<p>Note: As a good coding practice, it’s better to move grouped functionality into a separate header file!</p>
 <h1>Methods</h1>
 <ul>
 <li><strong>Functions defined inside a class or object.</strong></li>
@@ -75,12 +111,5 @@ We can now try to replicate this behavious in C:</p>
   <span class="z-keyword z-control z-c">return</span> <span class="z-constant z-numeric z-c">0</span><span class="z-punctuation z-terminator z-c">;</span>
 </span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
 </span></code></pre>
-<h1>Modules</h1>
-<ul>
-<li><strong>A way to organize code into separate files or namespaces.</strong></li>
-<li><strong>Found in: Python, JavaScript, Ruby, TypeScript, etc.</strong></li>
-</ul>
-<p><strong>TODO!</strong></p>
-
 	</body>
 </html>
