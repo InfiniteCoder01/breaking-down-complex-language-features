@@ -14,7 +14,7 @@ will help us understand what is going on under the hood
 
 # Modules
 - **A way to organize code into separate files or namespaces.**
-- **Found in: Python, JavaScript, Ruby, TypeScript, etc.**
+- **Found in: Python, JavaScript, Ruby, TypeScript.**
 
 [Code](https://github.com/InfiniteCoder01/breaking-down-complex-language-features/tree/master/code/modules)
 
@@ -55,7 +55,7 @@ Note: As a good coding practice, it's better to move grouped functionality into 
 
 # Methods
 - **Functions defined inside a class or object.**
-- **Found in: Java, Python, Ruby, C#, etc.**
+- **Found in: Java, Python, Ruby, C#.**
 
 [Code](https://github.com/InfiniteCoder01/breaking-down-complex-language-features/tree/master/code/methods)
 
@@ -105,19 +105,19 @@ We can now try to replicate this behavious in C:
 #include <stdint.h>
 
 struct Player {
-  float health;
+    float health;
 };
 
-void player_hit(struct Player* player, float damage) {
-  player->health -= damage;
+void player_hit(struct Player *player, float damage) {
+    player->health -= damage;
 }
 
 int main() {
-  struct Player player;
-  player.health = 100.0;
-  player_hit(&player, 20.0);
-  printf("Health: %f\n", player.health);
-  return 0;
+    struct Player player;
+    player.health = 100.0;
+    player_hit(&player, 20.0);
+    printf("Health: %f\n", player.health);
+    return 0;
 }
 ```
 
@@ -146,6 +146,7 @@ int main() {
 }
 ```
 
+Under the hood compiler just creates the same struct for all types it's used with.
 We can't replicate all the syntactic sugar, but we can utilize macros to make this in C:
 ```C
 #include <stdio.h>
@@ -169,3 +170,80 @@ Be aware: any typedef-ed type will resolve to a different name!
 Note: `A ## B` in a macro converts to AB. It's a token pasting operator, you can read more about it [here](https://learn.microsoft.com/en-us/cpp/preprocessor/token-pasting-operator-hash-hash?view=msvc-170)
 
 Another note: Zig also uses a similar approach to emulate generics
+
+# Inheritance
+- **Allows a class to inherit properties and methods from another class.**
+- **Found in: Java, C++, Python, C#.**
+
+[Code](https://github.com/InfiniteCoder01/breaking-down-complex-language-features/tree/master/code/inheritance)
+
+Inheritance is a useful feature in multiple OOP-oriented programming languages.
+It allows reusing functionality from parent's class by multiple children
+
+Look at the following C++ example:
+```C++
+#include <iostream>
+
+class Node {
+protected:
+    int x, y;
+
+public:
+    void setPosition(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
+};
+
+class Button: public Node {
+    unsigned int clicks = 0;
+
+public:
+    void click() {
+        clicks++;
+        std::cout << "Button at " << x << ", " << y << " was clicked " << clicks << " times!\n";
+    }
+};
+
+int main() {
+    Button button;
+    button.setPosition(15, 10);
+    button.click();
+    return 0;
+}
+```
+
+To recreate this in C, we can utilize a different concept - composition
+(yes, they are normally looked at opposites, but one can be implemented with another).
+This also plays nicely with C++'s ability to inherit multiple parents
+Here is the implementation:
+```C
+#include <stdio.h>
+
+struct Node {
+    int x, y;
+};
+
+void node_set_position(struct Node *node, int x, int y) {
+    node->x = x;
+    node->y = y;
+}
+
+struct Button {
+    struct Node node;
+    unsigned int clicks;
+};
+
+void button_click(struct Button *button) {
+    button->clicks++;
+    printf("Button at %d, %d was licked %u times!\n", button->node.x, button->node.y, button->clicks);
+}
+
+int main() {
+    struct Button button;
+    button.clicks = 0;
+    node_set_position(&button.node, 15, 10); // Note how we can use methods on the inner node
+    button_click(&button);
+    return 0;
+}
+```
