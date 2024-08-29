@@ -22,53 +22,49 @@ will help us understand what is going on under the hood</p>
 </ul>
 <p>Starting off simple. Methods are essential feature of all modern programming languages.
 And yet, C doesn’t have that. Let’s look at this simple example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Game </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    Vector2 playerPosition;
-</span><span style="color:#eff1f5;">
-</span><span style="color:#b48ead;">public</span><span style="color:#eff1f5;">:
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">update</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">float </span><span style="color:#bf616a;">deltaTime</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        playerPosition.</span><span style="color:#bf616a;">x </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> deltaTime;
-</span><span style="color:#eff1f5;">    }
-</span><span style="color:#eff1f5;">}
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {
-</span><span style="color:#c0c5ce;">    Game game;
-</span><span style="color:#c0c5ce;">    game.</span><span style="color:#8fa1b3;">update</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">0.1</span><span style="color:#c0c5ce;">);
-</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
-</span><span style="color:#c0c5ce;">}
-</span></pre>
+<pre><code><span class="z-source z-c++"><span class="z-meta z-class z-c++"><span class="z-storage z-type z-c++">class</span> <span class="z-entity z-name z-class z-c++">Game</span></span><span class="z-meta z-class z-c++"> <span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-class z-c++"><span class="z-meta z-block z-c++">
+    Vector2 playerPosition<span class="z-punctuation z-terminator z-c++">;</span>
+
+<span class="z-storage z-modifier z-c++">public</span><span class="z-punctuation z-section z-class z-c++">:</span>
+    <span class="z-storage z-type z-c">void</span> <span class="z-meta z-method z-c++"><span class="z-entity z-name z-function z-c++">update</span></span><span class="z-meta z-method z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-method z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-storage z-type z-c">float</span> <span class="z-variable z-parameter z-c++">deltaTime</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span></span><span class="z-meta z-method z-c++"> </span><span class="z-meta z-method z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-method z-c++"><span class="z-meta z-block z-c++">
+        playerPosition<span class="z-punctuation z-accessor z-dot z-c++">.</span><span class="z-variable z-other z-readwrite z-member z-c++">x</span> <span class="z-keyword z-operator z-assignment z-augmented z-c">+=</span> deltaTime<span class="z-punctuation z-terminator z-c++">;</span>
+    </span></span><span class="z-meta z-method z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span></span><span class="z-meta z-class z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+
+<span class="z-storage z-type z-c">int</span> <span class="z-meta z-function z-c++"><span class="z-entity z-name z-function z-c++">main</span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-meta z-function z-c++"> </span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">
+    Game game<span class="z-punctuation z-terminator z-c++">;</span>
+    game<span class="z-punctuation z-accessor z-dot z-c++">.</span><span class="z-meta z-method-call z-c++"><span class="z-variable z-function z-member z-c++">update</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-constant z-numeric z-c++">0.1</span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+    <span class="z-keyword z-control z-c++">return</span> <span class="z-constant z-numeric z-c++">0</span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span></code></pre>
 <p>Here we can see a class, that has a field called player_position and a method called update.
 But how does this method knows about player_position? Let’s transform the example:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Game </span><span style="color:#eff1f5;">{
-</span><span style="color:#65737e;">// &lt;...&gt;
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">update</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">float </span><span style="color:#bf616a;">deltaTime</span><span style="color:#eff1f5;">) {
-</span><span style="color:#eff1f5;">        </span><span style="color:#bf616a;">this</span><span style="color:#eff1f5;">-&gt;</span><span style="color:#bf616a;">playerPosition</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">x </span><span style="color:#c0c5ce;">+=</span><span style="color:#eff1f5;"> deltaTime; </span><span style="color:#65737e;">// Added `this-&gt;`
-</span><span style="color:#eff1f5;">    }
-</span><span style="color:#eff1f5;">}
-</span><span style="color:#65737e;">// &lt;...&gt;
-</span></pre>
+<pre><code><span class="z-source z-c++"><span class="z-meta z-class z-c++"><span class="z-storage z-type z-c++">class</span> <span class="z-entity z-name z-class z-c++">Game</span></span><span class="z-meta z-class z-c++"> <span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-class z-c++"><span class="z-meta z-block z-c++">
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> &lt;...&gt;
+</span>    <span class="z-storage z-type z-c">void</span> <span class="z-meta z-method z-c++"><span class="z-entity z-name z-function z-c++">update</span></span><span class="z-meta z-method z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-method z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-storage z-type z-c">float</span> <span class="z-variable z-parameter z-c++">deltaTime</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span></span><span class="z-meta z-method z-c++"> </span><span class="z-meta z-method z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-method z-c++"><span class="z-meta z-block z-c++">
+        <span class="z-variable z-language z-c++">this</span><span class="z-punctuation z-accessor z-arrow z-c++">-&gt;</span><span class="z-variable z-other z-readwrite z-member z-c++">playerPosition</span><span class="z-punctuation z-accessor z-dot z-c++">.</span><span class="z-variable z-other z-readwrite z-member z-c++">x</span> <span class="z-keyword z-operator z-assignment z-augmented z-c">+=</span> deltaTime<span class="z-punctuation z-terminator z-c++">;</span> <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Added `this-&gt;`
+</span>    </span></span><span class="z-meta z-method z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span></span><span class="z-meta z-class z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+<span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> &lt;...&gt;
+</span></span></code></pre>
 <p>After this change, we can see that all class members are actually accessed using <code>this</code> pointer under the hood.
 But where does it come from? Let’s imagine it was in python:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Game</span><span style="color:#eff1f5;">:
-</span><span style="color:#c0c5ce;">    </span><span style="color:#65737e;"># &lt;...&gt;
-</span><span style="color:#c0c5ce;">    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">update</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">delta_time</span><span style="color:#c0c5ce;">: float):
-</span><span style="color:#c0c5ce;">        </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.player_position.x += delta_time
-</span><span style="color:#65737e;"># &lt;...&gt;
-</span></pre>
+<pre><code><span class="z-source z-python"><span class="z-meta z-class z-python"><span class="z-storage z-type z-class z-python">class</span> <span class="z-entity z-name z-class z-python"><span class="z-meta z-generic-name z-python">Game</span></span><span class="z-punctuation z-section z-class z-begin z-python">:</span></span>
+    <span class="z-comment z-line z-number-sign z-python"><span class="z-punctuation z-definition z-comment z-python">#</span> &lt;...&gt;
+</span><span class="z-meta z-function z-python">    <span class="z-storage z-type z-function z-python">def</span> <span class="z-entity z-name z-function z-python"><span class="z-meta z-generic-name z-python">update</span></span></span><span class="z-meta z-function z-parameters z-python"><span class="z-punctuation z-section z-parameters z-begin z-python">(</span></span><span class="z-meta z-function z-parameters z-python"><span class="z-variable z-parameter z-python">self</span><span class="z-punctuation z-separator z-parameters z-python">,</span> <span class="z-variable z-parameter z-python">delta_time</span></span><span class="z-meta z-function z-parameters z-annotation z-python"><span class="z-punctuation z-separator z-annotation z-parameter z-python">:</span> <span class="z-meta z-qualified-name z-python"><span class="z-support z-type z-python">float</span></span></span><span class="z-meta z-function z-parameters z-python"><span class="z-punctuation z-section z-parameters z-end z-python">)</span></span><span class="z-meta z-function z-python"><span class="z-punctuation z-section z-function z-begin z-python">:</span></span>
+        <span class="z-meta z-qualified-name z-python"><span class="z-variable z-language z-python">self</span><span class="z-punctuation z-accessor z-dot z-python">.</span><span class="z-meta z-generic-name z-python">player_position</span><span class="z-punctuation z-accessor z-dot z-python">.</span><span class="z-meta z-generic-name z-python">x</span></span> <span class="z-keyword z-operator z-assignment z-augmented z-python">+=</span> <span class="z-meta z-qualified-name z-python"><span class="z-meta z-generic-name z-python">delta_time</span></span>
+<span class="z-comment z-line z-number-sign z-python"><span class="z-punctuation z-definition z-comment z-python">#</span> &lt;...&gt;
+</span></span></code></pre>
 <p>AHA! <code>self</code> (alternative to C++’s <code>this</code>) comes as a special argument!
 We can now try to replicate this in C:</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#b48ead;">typedef struct</span><span style="color:#c0c5ce;"> Game {
-</span><span style="color:#c0c5ce;">    Vector2 player_position;
-</span><span style="color:#c0c5ce;">} Game;
-</span><span style="color:#c0c5ce;">
-</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">game_update</span><span style="color:#c0c5ce;">(Game* </span><span style="color:#bf616a;">game</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">float </span><span style="color:#bf616a;">delta_time</span><span style="color:#c0c5ce;">) {
-</span><span style="color:#c0c5ce;">    game-&gt;player_position.</span><span style="color:#bf616a;">x </span><span style="color:#c0c5ce;">+= delta_time;
-</span><span style="color:#c0c5ce;">}
-</span></pre>
+<pre><code><span class="z-source z-c"><span class="z-storage z-type z-c">typedef</span> <span class="z-storage z-type z-c">struct</span> Game <span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span>
+    Vector2 player_position<span class="z-punctuation z-terminator z-c">;</span>
+<span class="z-punctuation z-section z-block z-end z-c">}</span></span> <span class="z-entity z-name z-type z-typedef z-c">Game</span><span class="z-punctuation z-terminator z-c">;</span>
+
+<span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c"><span class="z-entity z-name z-function z-c">game_update</span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c"><span class="z-punctuation z-section z-group z-begin z-c">(</span></span></span><span class="z-meta z-function z-parameters z-c"><span class="z-meta z-group z-c">Game<span class="z-keyword z-operator z-c">*</span> <span class="z-variable z-parameter z-c">game</span><span class="z-punctuation z-separator z-c">,</span> <span class="z-storage z-type z-c">float</span> <span class="z-variable z-parameter z-c">delta_time</span><span class="z-punctuation z-section z-group z-end z-c">)</span></span></span><span class="z-meta z-function z-c"> </span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-begin z-c">{</span></span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c">
+    game<span class="z-punctuation z-accessor z-c">-&gt;</span>player_position<span class="z-punctuation z-accessor z-c">.</span><span class="z-variable z-other z-member z-c">x</span> <span class="z-keyword z-operator z-assignment z-augmented z-c">+=</span> delta_time<span class="z-punctuation z-terminator z-c">;</span>
+</span></span><span class="z-meta z-function z-c"><span class="z-meta z-block z-c"><span class="z-punctuation z-section z-block z-end z-c">}</span></span></span>
+</span></code></pre>
 <h1>Modules</h1>
 <ul>
 <li><strong>A way to organize code into separate files or namespaces.</strong></li>

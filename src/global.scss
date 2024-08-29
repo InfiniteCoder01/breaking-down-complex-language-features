@@ -1,9 +1,7 @@
 @import "bulma/bulma";
+@import "themes/base16-ocean.dark.css" (prefers-color-scheme: dark);
+@import "themes/base16-ocean.light.css" (prefers-color-scheme: light);
 
-h1 {
-    @extend .title;
-}
-
-/* pre {
-    background-color: var(--bulma-body-background-color) !important;
-} */
+/* h1 { */
+    /* @extend .title; */
+/* } */
