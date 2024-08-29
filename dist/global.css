@@ -1,6 +1,6 @@
 @charset "UTF-8";
-@import "themes/base16-ocean.dark.css" (prefers-color-scheme: dark);
-@import "themes/base16-ocean.light.css" (prefers-color-scheme: light);
+@import url("themes/base16-ocean.dark.css") (prefers-color-scheme: dark);
+@import url("themes/base16-ocean.light.css") (prefers-color-scheme: light);
 /*! bulma.io v1.0.2 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 :root {
@@ -21337,7 +21337,3 @@ has-background-danger.is-hoverable:active {
   cursor: pointer !important;
   pointer-events: all !important;
 }
-
-/* h1 { */
-/* @extend .title; */
-/* } */
